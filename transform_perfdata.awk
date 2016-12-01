@@ -5,18 +5,20 @@ BEGIN {
 # emptying the prefix for each line
 prefix_string=""
 
-$8 ~ /[0-9]/ {
-    #Replace ponctuation marks
+$5 ~ /[0-9]/ {
+    #Replace pronctuation marks
+    gsub("TIMET::","",$2);
     gsub(/ /,"_",$3);
+    gsub("HOSTNAME::","",$3);
     gsub(/ /,"_",$4);
+    gsub("SERVICEDESC::","",$4);
     gsub(/-/,"_",$3);
     gsub(/-/,"_",$4);
     gsub(/\./,"_",$3);
     gsub(/\./,"_",$4);
+    gsub("SERVICEPERFDATA::","",$5);
 
-
-
-    split($8, perfdatas, " ");
+    split($5, perfdatas, " ");
     old_string="";
 
     # We want to trasform 'foo bar=5 bar foo=6' in:
